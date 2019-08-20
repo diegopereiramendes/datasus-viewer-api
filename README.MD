@@ -28,3 +28,8 @@
   - user: datasus_user
   - senha: 12345
 ```
+
+## Melhorias futuras
+  - utilizar um banco de dados NOSQL, melhorar desempenho
+  - testar utilização um elastic-search ou kibana
+  - criação de testes unitários e integração
