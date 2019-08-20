@@ -19,16 +19,19 @@ public class JdbcConnection {
     private JdbcTemplate jdbcTemplate;
 
     private TransactionStatus getTransaction() {
+
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
         return status;
     }
 
     private void commit(TransactionStatus transactionStatus) {
+
         platformTransactionManager.commit(transactionStatus);
     }
 
     private void rollback(TransactionStatus transactionStatus) {
+
         platformTransactionManager.rollback(transactionStatus);
     }
 

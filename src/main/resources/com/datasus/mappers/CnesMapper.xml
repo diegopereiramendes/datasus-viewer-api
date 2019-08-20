@@ -3,23 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.datasus.mappers.CnesMapper">
 
-    <select id="findByCnes" resultType="com.datasus.model.Cnes" parameterType="String" >
-        select * from cnes_st WHERE cnes=#{cnes}
+    <select id="findByCnes" resultType="com.datasus.model.Cnes" parameterType="String">
+        select *
+        from cnes_st
+        WHERE cnes = #{cnes}
     </select>
 
-    <select id="findAll" resultType="com.datasus.model.Cnes" >
-        select * from cnes_st
+    <select id="findAll" resultType="com.datasus.model.Cnes">
+        select *
+        from cnes_st
     </select>
 
     <!--<select id="agrupar" resultType="com.datasus.modelCnes" parameterType="String" >-->
-        <!--select ${colunas},count(0) as contAgrupamento from cnes_st group by ${colunas}-->
+    <!--select ${colunas},count(0) as contAgrupamento from cnes_st group by ${colunas}-->
     <!--</select>-->
 
     <select id="groupingReport" resultType="java.util.LinkedHashMap">
         SELECT count(0) as contador,${colunas}
         FROM cnes_pf pf
-        INNER JOIN municipio m ON m.codigo_mun_datasus = pf.CODUFMUN
-        INNER JOIN tipo_pessoa t on t.id = pf.pf_pj
+        INNER JOIN municipio m ON m.codigo_mun_datasus = pf.CODUFMUN::integer
+        INNER JOIN tipo_pessoa t on t.id = pf.pf_pj::integer
         WHERE 1 = 1
         <if test="uf != null">
             AND m.uf = #{uf}
@@ -42,9 +45,7 @@
         <if test="notIsSUS != null">
             AND PROFNSUS::boolean = #{notIsSUS}
         </if>
-
         group by ${colunas}
---         order by ${colunas}
     </select>
 
 </mapper>

@@ -3,9 +3,10 @@
 <mapper namespace="com.datasus.mappers.CityMapper">
     <select id="findByUf" resultType="com.datasus.model.City">
         SELECT m.codigo_mun_datasus as codigo,
-               m.nome as descricao,
-               m.uf as siglaEstado
-        FROM   municipio  m where m.uf = #{uf}
-        and exists (select 0 from cnes_st s where s.codufmun = m.codigo_mun_datasus ) order by m.nome
+               m.nome               as descricao,
+               m.uf                 as siglaEstado
+        FROM municipio m
+        where m.uf = #{uf}
+        order by m.nome
     </select>
 </mapper>

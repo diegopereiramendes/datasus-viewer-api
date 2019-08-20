@@ -49,7 +49,9 @@ public class ImportService {
         }
     }
 
+    //TODO jogar em uma classe DAO
     private void createTableFromFile(EnumDomainFileDatasus domain, String typeFile, DBFReaderUtils dbfReaderUtils) {
+
         String headers = dbfReaderUtils.header();
         String comandSql = "CREATE TABLE IF NOT EXISTS public." + domain + "_" + typeFile + " ( " + headers + ")";
         jdbcConnection.executeSql(comandSql);
@@ -78,6 +80,7 @@ public class ImportService {
     }
 
     private File downloadFileDBC(final String filename, final String tipoArquivo, final EnumDomainFileDatasus domain) throws IOException {
+
         final String urlRootDownload = domain.getUrlDownload();
         final String urlDownload = FileUtils.createUrlDownload(filename, tipoArquivo, urlRootDownload);
         final String pathDBC = FileUtils.createPathFileTemp(filename, EnumExtensionFile.DBC);
